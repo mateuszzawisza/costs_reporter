@@ -7,37 +7,11 @@ class CostsEntry(object):
         self.service = service
         self.operation = operation
         self.usagetype = usagetype
-        self.resource = resource
-        self.starttime = starttime
-        self.endtime = endtime
+        self.resource = resource or None
+        self.starttime = self._date_from_string(starttime)
+        self.endtime = self._date_from_string(endtime)
         self.usagevalue = usagevalue
 
-    @property
-    def resource(self):
-        return self.__resource
-
-    @resource.setter
-    def resource(self, resource):
-        if not resource:
-            self.__resource = None
-        else:
-          self.__resource = resource
-
-    @property
-    def starttime(self):
-        return self.__starttime
-
-    @starttime.setter
-    def starttime(self, starttime):
-        self.__starttime = self._date_from_string(starttime)
-
-    @property
-    def endtime(self):
-        return self.__endtime
-
-    @endtime.setter
-    def endtime(self, endtime):
-        self.__endtime = self._date_from_string(endtime)
 
     def _date_from_string(self, datestring):
         return datetime.datetime(
